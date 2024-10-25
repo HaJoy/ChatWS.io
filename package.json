@@ -1,0 +1,20 @@
+{
+  "name": "chatws.io",
+  "version": "1.0.0",
+  "description": "ChatWS.io es una API que permite el chat entre dos personas mediante el uso de websockets de Socket.IO",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.10.0",
+    "mongoose": "^8.7.2",
+    "socket.io": "^4.8.0"
+  }
+}
