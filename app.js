@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
 
+
 // get config vars
 dotenv.config();
 
@@ -25,7 +26,7 @@ const { index } = require('./routes');
 // auth
 const { generateAccessToken, authenticateToken } = require('./helpers/auth');
 
-index(app, models, generateAccessToken, jwt);
+index(app, models, generateAccessToken, authenticateToken, jwt);
 
 app.listen(port, () => {
     console.log(`Listening port ${port}`);
