@@ -3,15 +3,43 @@ const { join } = require('node:path');
 exports.index = (app, models, generateAccessToken, authenticateToken, jwt, io) => {
     
     // GET routes
-    app.get('/', (req, res) => {
+   /*  app.get('/', (req, res) => {
         res.sendFile(join(__dirname, '../public/index.html'));
+        io.on('connection', (socket) => {
+            console.log('a user connected');
+
+            socket.on('hello', (msg) => {
+                console.log(msg);
+            });
+        });
+    });
+ */
+    io.on('connection', (socket) => {
+        console.log('a user connected');
+        
+        /* app.get('/', (req, res) => {
+            socket.on('hello', (msg) => {
+                console.log(msg);
+                res.send(`<li>${msg}</li>`);
+            });
+            
+        }); */
+
+        socket.on('chat message', (msg) => {
+            console.log('message: ' + msg);
+            io.emit('chat message', msg);
+        });
+
+        socket.on('disconnect', () => {
+            console.log('user disconnected');
+        });
     });
 
 
 
 
     // POST routes
-    app.post('/user',authenticateToken, async (req, res) => {
+    app.post('/user', authenticateToken, async (req, res) => {
         let user = req.body;
         let newUser = await models.user.create(user);
         res.json(newUser);
@@ -35,11 +63,5 @@ exports.index = (app, models, generateAccessToken, authenticateToken, jwt, io) =
 
 
     // websockets
-    io.on('connection', (socket) => {
-        console.log('a user connected');
-
-        socket.on('hello', (msg) => {
-            console.log(msg);
-        });
-    });
+    
 };
