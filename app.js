@@ -26,7 +26,11 @@ const { index } = require('./routes');
 // auth
 const { generateAccessToken, authenticateToken } = require('./helpers/auth');
 
-index(app, models, generateAccessToken, authenticateToken, jwt);
+// websocket
+const { ioSocket } = require('./rtc');
+const io = ioSocket(app);
+
+index(app, models, generateAccessToken, authenticateToken, jwt, io);
 
 app.listen(port, () => {
     console.log(`Listening port ${port}`);
