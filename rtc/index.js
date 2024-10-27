@@ -1,6 +1,5 @@
 const http = require('http');
 let ioPort = parseInt(process.env.IOPORT);
-console.log(typeof ioPort);
 
 exports.ioSocket = (app) => {
     const server = http.createServer(app);
