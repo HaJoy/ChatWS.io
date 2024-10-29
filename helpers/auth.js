@@ -1,9 +1,11 @@
 
+const jwt = require('jsonwebtoken');
+
 exports.generateAccessToken = (data, jwt) => {
     return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
 }
 
-exports.authenticateToken = (req, res, next, jwt) => {
+exports.authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
 
